@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToysBravelly - Caça de Controle Remoto</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@600&display=swap');
+
+    :root {
+      --bg: #f9f9f9;
+      --primary: #000;
+      --secondary: #28a745;
+      --dark: #222;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+    }
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+    }
+    .logo span:first-child {
+      color: white;
+    }
+    .logo span:last-child {
+      color: var(--secondary);
+    }
+    .slogan {
+      flex: 1 1 100%;
+      margin-top: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem;
+      color: #eee;
+    }
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      background: white;
+    }
+    .hero img {
+      max-width: 400px;
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .hero-text {
+      max-width: 500px;
+      margin-left: 30px;
+    }
+    .hero-text h2 {
+      color: var(--secondary);
+      font-size: 2rem;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: var(--secondary);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .benefits, .reviews, .upsells, .promotion {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .benefits h3, .reviews h3, .upsells h3, .promotion h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .countdown {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .alert {
+      color: red;
+      font-weight: bold;
+      animation: blink 1s infinite;
+      margin-top: 10px;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    .fixed-btn {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--secondary);
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-decoration: none;
+      z-index: 999;
+    }
+    @media (max-width: 768px) {
+      header { flex-direction: column; }
+      .hero { flex-direction: column; }
+      .hero-text { margin-left: 0; margin-top: 20px; text-align: center; }
+      .grid { grid-template-columns: 1fr; }
+      .btn { width: 100%; padding: 15px; font-size: 1.1rem; }
+      .fixed-btn { display: block; }
+    }
+  </style>
+  <script>
+    function startCountdown(duration, display) {
+      let timer = duration, hours, minutes, seconds;
+      setInterval(function () {
+        hours = parseInt(timer / 3600, 10);
+        minutes = parseInt((timer % 3600) / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = hours + ":" + minutes + ":" + seconds;
+
+        if (--timer < 0) {
+          timer = 24 * 60 * 60;
+        }
+      }, 1000);
+    }
+
+    window.onload = function () {
+      let oneDay = 60 * 60 * 24,
+          display = document.querySelector('#time');
+      startCountdown(oneDay, display);
+
+      const mainImage = document.getElementById('mainImage');
+      const thumbnails = document.querySelectorAll('.thumb');
+      thumbnails.forEach(thumb => {
+        thumb.addEventListener('click', () => {
+          mainImage.src = thumb.src;
+        });
+      });
+    };
+  </script>
+</head>
+<body>
+
+  <header>
+    <div class="logo"><span>Toys</span><span>Bravelly</span></div>
+    <div class="slogan">
+      🎁 Os melhores brinquedos para sua criança desfrutar de aventuras incríveis!
+    </div>
+  </header>
+
+  <section class="hero">
+    <img src="images/apa.jpg" alt="Caça Controle Remoto Brinquedo">
+    <div class="hero-text">
+      <h2>Domine os céus com o Caça ToysBravelly!</h2>
+      <p>Nosso avião de controle remoto é rápido, resistente e fácil de pilotar. Ideal para crianças que amam adrenalina e diversão nas alturas!</p>
+      <a href="#comprar" class="btn">Quero o meu agora!</a>
+    </div>
+  </section>
+
+  <section class="product-gallery">
+    <h3 style="text-align:center; margin-bottom:20px;">Galeria do Produto</h3>
+    <div style="display:flex; flex-direction:column; align-items:center;">
+      <img id="mainImage" src="images/bdote.jpg" alt="Caça Controle Remoto" style="max-width:400px; width:100%; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); margin-bottom:10px;">
+      <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+        <img class="thumb" src="images/apa.jpg" alt="Vista principal" style="width:80px; height:auto; cursor:pointer; border-radius:5px;">
+        <img class="thumb" src="images/bdote.jpg" alt="Vista frontal" style="width:80px; height:auto; cursor:pointer; border-radius:5px;">
+        <img class="thumb" src="images/dboar.jpg" alt="Vista lateral" style="width:80px; height:auto; cursor:pointer; border-radius:5px;">
+        <img class="thumb" src="images/etamanho.jpg" alt="Detalhe tamanho" style="width:80px; height:auto; cursor:pointer; border-radius:5px;">
+        <img class="thumb" src="images/temilia.jpg" alt="Detalhe família" style="width:80px; height:auto; cursor:pointer; border-radius:5px;">
+        <img class="thumb" src="images/xonteudo.jpg" alt="Conteúdo incluso" style="width:80px; height:auto; cursor:pointer; border-radius:5px;">
+        <img class="thumb" src="images/zfim.jpg" alt="Vista final" style="width:80px; height:auto; cursor:pointer; border-radius:5px;">
+      </div>
+    </div>
+  </section>
+
+  <section class="promotion">
+    <h3>🎉 Promoção Especial Dia das Crianças</h3>
+    <p><strong>Kit Caça de Combate + Bateria extra + Hélices extras</strong></p>
+    <p>De <s>R$349,90</s> por apenas <strong style="color: var(--secondary); font-size: 1.5rem;">R$289,90</strong></p>
+    <div class="countdown">Oferta expira em: <span id="time"></span></div>
+    <div class="alert">⚠️ Últimas unidades!</div>
+    <a href="#" class="btn">Comprar Agora</a>
+  </section>
+
+  <section class="benefits">
+    <h3>✨ Por que escolher o Caça ToysBravelly?</h3>
+    <div class="grid">
+      <div class="card">✈️ Velocidade incrível para manobras aéreas</div>
+      <div class="card">🔋 Bateria recarregável e de longa duração</div>
+      <div class="card">💪 Material leve e super resistente</div>
+      <div class="card">🎁 Presente perfeito para pilotos mirins</div>
+    </div>
+  </section>
+
+  <section class="reviews">
+    <h3>💬 O que dizem os clientes</h3>
+    <div class="grid">
+      <div class="card">“Meu filho adorou pilotar, muito divertido!” – Ana S.</div>
+      <div class="card">“A qualidade é excelente, recomendo!” – Carlos M.</div>
+      <div class="card">“Entrega rápida e produto de primeira.” – Fernanda L.</div>
+    </div>
+  </section>
+
+  <section class="upsells">
+    <h3>🎁 Aproveite também!</h3>
+    <div class="grid">
+      <div class="card">🚀 Foguete Espacial de Controle Remoto <br><strong>R$199,90</strong></div>
+      <div class="card">🚘 Carro Monstro Turbo <br><strong>R$149,90</strong></div>
+      <div class="card">🛸 Drone Kids Mini <br><strong>R$179,90</strong></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 ToysBravelly. Todos os direitos reservados.</p>
+  </footer>
+
+  <a href="#comprar" class="fixed-btn">🔥 Comprar Agora</a>
+
+</body>
+</html>
